@@ -78,6 +78,12 @@ button:hover {
     margin: 0px;
 }
 
+.amenities .popover li{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .locations .popover {
     margin-top: 0%;
 }
@@ -100,4 +106,8 @@ button:hover {
 .amenities:hover .popover,
 .locations:hover .popover {
     visibility: visible;
+}
+
+#amenities_selected {
+    white-space: nowrap;
 }
