@@ -6,15 +6,15 @@ from models.user import User
 from models import storage
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
-from flasgger.utils import swag_from
+# from flasgger.utils import swag_from
 
 
 @app_views.route('/places/<place_id>/reviews', methods=['GET'],
                  strict_slashes=False)
-@swag_from('documentation/reviews/get_reviews.yml', methods=['GET'])
+# @swag_from('documentation/reviews/get_reviews.yml', methods=['GET'])
 def get_reviews(place_id):
     """
-    Retrieves the list of all Review objects of a Place
+    file: documentation/reviews/get_reviews.yml
     """
     place = storage.get(Place, place_id)
 
@@ -27,10 +27,10 @@ def get_reviews(place_id):
 
 
 @app_views.route('/reviews/<review_id>', methods=['GET'], strict_slashes=False)
-@swag_from('documentation/reviews/get_review.yml', methods=['GET'])
+# @swag_from('documentation/reviews/get_review.yml', methods=['GET'])
 def get_review(review_id):
     """
-    Retrieves a Review object
+    file: documentation/reviews/get_review.yml
     """
     review = storage.get(Review, review_id)
     if not review:
@@ -41,10 +41,10 @@ def get_review(review_id):
 
 @app_views.route('/reviews/<review_id>', methods=['DELETE'],
                  strict_slashes=False)
-@swag_from('documentation/reviews/delete_reviews.yml', methods=['DELETE'])
+# @swag_from('documentation/reviews/delete_reviews.yml', methods=['DELETE'])
 def delete_review(review_id):
     """
-    Deletes a Review Object
+    file: documentation/reviews/delete_reviews.yml
     """
 
     review = storage.get(Review, review_id)
@@ -60,10 +60,10 @@ def delete_review(review_id):
 
 @app_views.route('/places/<place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
-@swag_from('documentation/reviews/post_reviews.yml', methods=['POST'])
+# @swag_from('documentation/reviews/post_reviews.yml', methods=['POST'])
 def post_review(place_id):
     """
-    Creates a Review
+    file: documentation/reviews/post_reviews.yml
     """
     place = storage.get(Place, place_id)
 
@@ -92,10 +92,10 @@ def post_review(place_id):
 
 
 @app_views.route('/reviews/<review_id>', methods=['PUT'], strict_slashes=False)
-@swag_from('documentation/reviews/put_reviews.yml', methods=['PUT'])
+# @swag_from('documentation/reviews/put_reviews.yml', methods=['PUT'])
 def put_review(review_id):
     """
-    Updates a Review
+    file: documentation/reviews/put_reviews.yml
     """
     review = storage.get(Review, review_id)
 
