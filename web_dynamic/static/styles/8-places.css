@@ -99,3 +99,42 @@
 .user {
   margin-bottom: 1.5%;
 }
+
+.reviews {
+    margin: 5% 0;
+    width: 100%;
+}
+
+.reviews > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.reviews span {
+    text-align: right;
+    display: inline;
+    cursor: pointer;
+}
+.reviews span:hover {
+    text-decoration: underline;
+}
+
+.reviews>ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+}
+
+.reviews ul li h3 {
+    margin-top: 0;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}
+
+.reviews ul li p {
+    padding-bottom: 5%;
+    margin-top: 0px;
+}
