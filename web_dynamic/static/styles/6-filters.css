@@ -103,7 +103,7 @@ button:hover {
     margin-left: 0px;
 }
 
-.popover span{
+.popover div {
     display: flex;
     flex-direction: row;
     gap: 10px;

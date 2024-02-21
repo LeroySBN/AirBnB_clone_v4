@@ -164,10 +164,6 @@ $(document).ready(function() {
                   <span>show</span>
                 </div>
                 <ul data-id=${place.id} class="place_reviews">
-                  <li>
-                    <h3>From Kamie Nean the 6th September 2017</h3>
-                    <p>I felt like a Queen during my stay!</p>
-                  </li>
                 </ul>
             </div>
           </article>
@@ -179,7 +175,7 @@ $(document).ready(function() {
     }
   });
 
-  // SEARCH BUTTON
+  // SEARCH FUNCTIONALITY
   $(':button').on('click', function(){
     let amenitys = {'amenities': amenities, 'cities': cities, 'states': states};
     $.ajax({
@@ -209,6 +205,14 @@ $(document).ready(function() {
             <div class="description">
               ${place.description}
             </div>
+            <div class=reviews>
+                <div>
+                  <h2>Reviews</h2>
+                  <span>show</span>
+                </div>
+                <ul data-id="${place.id}" class="place_reviews">
+                </ul>
+            </div>
           </article>
         `;
         renderedPlaces += renderedPlace;
@@ -219,33 +223,6 @@ $(document).ready(function() {
     });
   });
 
-  // REVIEW FUNCTIONALITY
-  // Function to fetch, parse, and display text from the API
-  function fetchData() {
-    $.ajax({
-      type: 'POST',
-      url: 'http://0.0.0.0:5001/api/v1//places/<place_id>/reviews',
-      headers: { 'Content-Type': 'application/json' },
-      data: '{}',
-      success: function(data) {
-        // Loop through the places in the response data
-        var renderedReviews = '';
-        $.each(data, function(index, place) {
-          var renderedReviews = `
-            <ul class="place_reviews">
-              <li>
-                <h3>From Kamie Nean the 6th September 2017</h3>
-                <p>I felt like a Queen during my stay!</p>
-              </li>
-            </ul>
-          `;
-          renderedReviews += renderedReviews;
-        });
-        // Insert the rendered jinja template into the HTML
-        $('.places').append(renderedReviews);
-      }
-    });
-  }
 
   // Click event handler for the span element
   $('span').on('click', function() {
@@ -256,11 +233,38 @@ $(document).ready(function() {
       $span.closest('.place_reviews').remove();
     } else {
       // Fetch, parse, and display text from the API
+      placeId = $span.closest('.place_reviews').data('id');
       fetchData();
     }
     // Change the span text to "hide"
     $span.text('hide');
   });
-  
+
+
+  // REVIEW FUNCTIONALITY
+  // Function to fetch, parse, and display text from the API
+  function fetchData() {
+    $.ajax({
+      type: 'POST',
+      url: 'http://0.0.0.0:5001/api/v1/places/${placeId}/reviews',
+      headers: { 'Content-Type': 'application/json' },
+      data: '{}',
+      success: function(data) {
+        // Loop through the places in the response data
+        var renderedReviews = '';
+        $.each(data, function(index, review) {
+          var renderedReviews = `
+            <li>
+              <h3>From Kamie Nean the 6th September 2017</h3>
+              <p>${review.text}</p>
+            </li>
+          `;
+          renderedReviews += renderedReviews;
+        });
+        // Insert the rendered jinja template into the HTML
+        $('.place.reviews').append(renderedReviews);
+      }
+    });
+  }
 
 });
